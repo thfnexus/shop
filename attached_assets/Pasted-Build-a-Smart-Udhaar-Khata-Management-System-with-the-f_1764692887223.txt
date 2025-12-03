@@ -1,0 +1,171 @@
+Build a Smart Udhaar / Khata Management System with the following full functionality:"
+1. SYSTEM INTRODUCTION
+
+Create a complete “Smart Udhaar Management System” that works like digital ledger/khata.
+The system must allow:
+
+Add khata (customer account)
+
+Add entries to khata (credit/debit)
+
+Bulk message parsing
+
+Auto-sorting entries into correct khata
+
+Show total balance for any customer
+
+Show monthly report
+
+Generate downloadable invoice when asked
+
+Fully API-based clean structure
+
+2. K H A T A F E A T U R E S
+A. Create Khata
+
+Endpoint: /khata/create
+Input:
+
+{
+  "name": "Ali"
+}
+
+
+System automatically creates a clean khata with:
+
+name
+
+unique ID
+
+entries list (empty)
+
+total = 0
+
+B. Add Entry
+
+Endpoint: /khata/add-entry
+Input:
+
+{
+  "name": "Ali",
+  "item": "Chini",
+  "price": 200
+}
+
+
+System updates that khata and recalculates total.
+
+C. Bulk Message Input
+
+Endpoint: /khata/bulk
+
+Input example:
+Ali Chini 200
+Fahad Oil 500
+Ahmed Daal 120
+Ali Aata 300
+
+System must:
+
+Detect each line
+
+Identify the khata name in each line
+
+Extract item and price
+
+Insert into that khata’s account
+
+Auto-update totals
+
+D. Get Total of Khata
+
+Endpoint: /khata/total?name=Ali
+
+System returns:
+
+{
+  "name": "Ali",
+  "total": 500,
+  "entries": [
+    {"item":"Chini", "price":200},
+    {"item":"Aata", "price":300}
+  ]
+}
+
+E. Monthly Statement
+
+Endpoint: /khata/monthly?name=Ali&month=January-2025
+Return chart-ready data + all entries of that month.
+
+F. Generate Invoice
+
+Endpoint: /khata/invoice?name=Ali
+
+System must generate a clean PDF invoice including:
+
+Name
+
+Date
+
+All udhaar entries
+
+Total
+
+Status (Pending / Paid)
+
+Invoice number
+
+3. TECHNOLOGY
+
+System should be built using:
+
+Backend:
+
+Next.js API routes OR Python FastAPI
+(Choose automatically based on best fit)
+
+Database:
+
+JSON / Local storage / SQLite
+(Auto-select depending on framework)
+
+Extra Features:
+
+Clean folder structure
+
+Commented code
+
+Defensive error handling
+
+Easy to deploy
+
+4. SAMPLE QUERIES SYSTEM MUST UNDERSTAND
+"Ali ke kitne hue?"
+
+System should reply total amount.
+
+"Ali ka monthly invoice generate karo"
+
+PDF generate.
+
+"Ye bulk add kr do"
+
+Then system will ask for bulk text input.
+
+5. UI (OPTIONAL)
+
+If UI is generated, it must include:
+
+Add Khata page
+
+Add Entry page
+
+Bulk upload box
+
+Search customer
+
+Total summary
+
+Monthly report charts
+
+Invoice download button
